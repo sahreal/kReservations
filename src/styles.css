@@ -1,4 +1,31 @@
+body {
+  height: 100vh;
+  width: 100vw;
+  margin: 0;
+  background-size: cover;
+  overflow-x: hidden;
+  background: linear-gradient(
+    0deg,
+    rgba(255, 255, 255, 1) 0%,
+    rgba(250, 244, 170, 1) 0%,
+    rgba(227, 179, 33, 1) 81%,
+    rgba(213, 133, 3, 1) 100%
+  );
+}
+
 h1 {
-  color: white;
-  background-color: black;
+  color: black;
+  margin-left: 30px;
+}
+
+.card {
+  background: rgb(255, 238, 203);
+  display: flex;
+  flex-direction: column;
+  margin-left: 20%;
+  margin-right: 20%;
+}
+
+.prompt {
+  padding: 20px 0px 20px 50px;
 }
