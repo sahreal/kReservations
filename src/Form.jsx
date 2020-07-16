@@ -1,15 +1,17 @@
 import React, { PureComponent } from "react";
+import ConfirmButton from "./ConfirmButton";
+import { useLocation } from "react-router-dom";
 import "./styles.css";
 
 class Form extends PureComponent {
   constructor(props) {
     super(props);
-
     this.state = {
       date: "",
       time: "",
       name: "",
-      number: "",
+      phone: "",
+      email: "",
       party: 0,
       region: "",
       children: 0,
@@ -22,7 +24,23 @@ class Form extends PureComponent {
     this.inputChange = this.inputChange.bind(this);
   }
 
-  componentDidMount() {}
+  componentDidMount() {
+    if (localStorage.getItem("rez")) {
+      let newState = JSON.parse(localStorage.getItem("rez"));
+      this.setState({
+        date: newState.date,
+        time: newState.time,
+        name: newState.name,
+        number: newState.number,
+        party: newState.party,
+        region: newState.region,
+        children: newState.children,
+        smoking: newState.smoking,
+        birthday: newState.birthday,
+        bitrhdayName: newState.birthdayName
+      });
+    }
+  }
 
   handleChange(e) {
     let name = e.target.name;
@@ -39,7 +57,6 @@ class Form extends PureComponent {
   }
 
   render() {
-    console.log(this.state, "state");
     return (
       <div className="card">
         <div className="prompt">
@@ -52,9 +69,7 @@ class Form extends PureComponent {
                 value={this.state.date}
                 onChange={this.handleChange}
               >
-                <option disabled selected value>
-                  -- select a date --
-                </option>
+                <option defaultValue>-- select a date --</option>
                 <option value="July-24">July 24th</option>
                 <option value="July-25">July 25th</option>
                 <option value="July-26">July 26th</option>
@@ -77,7 +92,7 @@ class Form extends PureComponent {
                 value={this.state.time}
                 onChange={this.handleChange}
               >
-                <option selected="selected">-- select a time --</option>
+                <option defaultValue>-- select a time --</option>
                 <option value="6">6pm</option>
                 <option value="6:30">6:30pm</option>
                 <option value="7">7pm</option>
@@ -173,12 +188,23 @@ class Form extends PureComponent {
         <div className="prompt">
           <form>
             <label>How Many Children will be in your party?</label>
-            <input
-              type="text"
+            <select
               name="children"
-              value={this.state.region}
+              value={this.state.children}
               onChange={this.handleChange}
-            />
+            >
+              <option value="0">0</option>
+              <option value="1">1</option>
+              <option value="2">2</option>
+              <option value="3">3</option>
+              <option value="4">4</option>
+              <option value="5">5</option>
+              <option value="6">6</option>
+              <option value="7">7</option>
+              <option value="8">8</option>
+              <option value="9">9</option>
+              <option value="10">10</option>
+            </select>
           </form>
         </div>
         <div className="prompt">
@@ -201,9 +227,9 @@ class Form extends PureComponent {
             <label>
               Is anyone in your party be celebrating a birthday?
               <select
-                name="smoking"
-                value={this.state.smoking}
-                onChange={this.handleSelect}
+                name="birthday"
+                value={this.state.birthday}
+                onChange={this.handleChange}
               >
                 <option value={false}>No</option>
                 <option value={true}>Yes</option>
@@ -212,12 +238,13 @@ class Form extends PureComponent {
             <input
               type="text"
               name="birthdayName"
-              value={this.state.birthdaName}
+              value={this.state.birthdayName}
               onChange={this.inputChange}
               placeholder="Optional: please enter their name"
             />
           </form>
         </div>
+        <ConfirmButton state={this.state} />
       </div>
     );
   }
