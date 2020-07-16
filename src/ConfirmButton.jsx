@@ -5,7 +5,6 @@ function Confirm({ state }) {
   const history = useHistory();
 
   const submitHandler = () => {
-    console.log(state, "state");
     history.push({
       pathname: "/review",
       data: state
