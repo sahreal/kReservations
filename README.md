@@ -1,6 +1,6 @@
 # kReservations
 
-App to help users book reservations at their favorite
+App to help users book reservations at their favorite restaurant
 
 ## Building and running on localhost
 
