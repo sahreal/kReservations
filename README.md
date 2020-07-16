@@ -1,6 +1,6 @@
-# empty-project
+# kReservations
 
-kReservations
+App to help users book reservations at their favorite
 
 ## Building and running on localhost
 
