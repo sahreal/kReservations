@@ -4,27 +4,30 @@ import DateTime from "./prompts/DateTime";
 import UserDetails from "./prompts/UserDetails";
 import Guests from "./prompts/Guests";
 import Seating from "./prompts/Seating";
+import axios from "axios";
 import "./styles.css";
 
 class Form extends PureComponent {
   constructor(props) {
     super(props);
     this.state = {
-      date: "",
+      date: "July-24",
       time: "",
       name: "",
       phone: "",
       email: "",
       party: 0,
-      region: "",
+      region: "MainHall",
       children: 0,
       smoking: false,
       birthday: false,
-      birthdayName: ""
+      birthdayName: "",
+      totalGuests: 0
     };
 
     this.handleChange = this.handleChange.bind(this);
     this.inputChange = this.inputChange.bind(this);
+    this.getData = this.getData.bind(this);
   }
 
   componentDidMount() {
@@ -41,15 +44,37 @@ class Form extends PureComponent {
         children: newState.children,
         smoking: newState.smoking,
         birthday: newState.birthday,
-        bitrhdayName: newState.birthdayName
+        birthdayName: newState.birthdayName,
+        totalGuests: newState.totalGuests
       });
     }
+  }
+
+  getData() {
+    return axios
+      .get("/getAll", {
+        params: {
+          date: this.state.date,
+          region: this.state.region,
+          time: this.state.time
+        }
+      })
+      .then(result => console.log(result.data, "data"))
+      .catch(err => console.log(err, "getAll error"));
   }
 
   handleChange(e) {
     let name = e.target.name;
     let value = e.target.value;
-    this.setState({ [name]: value });
+
+    if (name === "party" || name === "children") {
+      this.setState({
+        totalGuests: this.state.totalGuests + Number(value),
+        [name]: value
+      });
+    } else {
+      this.setState({ [name]: value });
+    }
   }
 
   inputChange(event) {
@@ -61,34 +86,42 @@ class Form extends PureComponent {
   }
 
   render() {
+    console.log(this.state.children, "children");
+    const state = this.state;
     return (
       <div className="card">
         <DateTime
           handleChange={this.handleChange}
-          input={this.inputChange}
-          date={this.state.date}
-          time={this.state.time}
+          region={state.region}
+          children={state.children}
+          date={state.date}
+          time={state.time}
+          getData={this.getData}
         />
-        <UserDetails
-          inputChange={this.inputChange}
-          name={this.state.name}
-          email={this.state.email}
-          phone={this.state.phone}
+        <Seating
+          handleChange={this.handleChange}
+          region={state.region}
+          smoking={state.smoking}
+          children={state.children}
+          region={state.region}
         />
         <Guests
           handleChange={this.handleChange}
           inputChange={this.inputChange}
-          party={this.state.party}
-          children={this.state.children}
-          birthday={this.state.birthday}
-          birthdayName={this.state.birthdayName}
+          party={state.party}
+          children={state.children}
+          birthday={state.birthday}
+          birthdayName={state.birthdayName}
+          region={state.region}
         />
-        <Seating
-          handleChange={this.handleChange}
-          region={this.state.region}
-          smoking={this.state.smoking}
+        <UserDetails
+          inputChange={this.inputChange}
+          name={state.name}
+          email={state.email}
+          phone={state.phone}
         />
-        <ConfirmButton state={this.state} />
+
+        <ConfirmButton state={state} />
       </div>
     );
   }

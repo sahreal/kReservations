@@ -2,6 +2,15 @@ import React from "react";
 import "../styles.css";
 
 const UserDetails = ({ inputChange, name, phone, email }) => {
+  const validateEmail = input => {
+    const regex = /^[a-zA-Z0-9]+@[a-zA-Z0-9]+\.[A-Za-z]+$/;
+    return regex.test(input);
+  };
+
+  const validatePhone = input => {
+    const regex = /^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$/;
+    return regex.test(input);
+  };
   return (
     <div>
       <div className="prompt">
@@ -27,6 +36,9 @@ const UserDetails = ({ inputChange, name, phone, email }) => {
             onChange={inputChange}
           />
         </form>
+        {email.length > 0 && !validateEmail(email) ? (
+          <div>Please enter a valid email</div>
+        ) : null}
       </div>
       <div className="prompt">
         <form>
@@ -35,10 +47,15 @@ const UserDetails = ({ inputChange, name, phone, email }) => {
             type="text"
             name="phone"
             placeholder="enter phone number"
+            id="phoneNumber"
+            maxLength="12"
             value={phone}
             onChange={inputChange}
           />
         </form>
+        {phone.length > 0 && !validatePhone(phone) ? (
+          <div>Please enter a valid phone number</div>
+        ) : null}
       </div>
     </div>
   );
