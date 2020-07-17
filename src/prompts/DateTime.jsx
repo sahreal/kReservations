@@ -1,10 +1,10 @@
 import React from "react";
 import "../styles.css";
 
-const DateTime = ({ handleChange, inputChange, date, time }) => {
+const DateTime = ({ handleChange, getData, region, children, date, time }) => {
   return (
     <div>
-      <div className="prompt">
+      <div>
         Please Select a Reservation Date:
         <form>
           <label>
@@ -23,7 +23,7 @@ const DateTime = ({ handleChange, inputChange, date, time }) => {
           </label>
         </form>
       </div>
-      <div className="prompt">
+      <div>
         Please Select a Time:
         <form>
           <label>
@@ -41,6 +41,30 @@ const DateTime = ({ handleChange, inputChange, date, time }) => {
             </select>
           </label>
         </form>
+        <div>
+          <form>
+            <label>
+              Pick your perferred seating area:
+              <select name="region" value={region} onChange={handleChange}>
+                <option defaultValue>-- select a dining area --</option>
+                <option value="MainHall">Main Hall</option>
+                <option disabled={children > 0 ? true : null} value="Bar">
+                  {children > 0 ? "No Children perimtted in Bar Area" : "Bar"}
+                </option>
+                <option value="Riverside">Riverside</option>
+                <option
+                  disabled={children > 0 ? true : null}
+                  value="RiversideSmoking"
+                >
+                  {children > 0
+                    ? "No Children perimtted in Smoking Area"
+                    : " Riverside Smoking Section"}
+                </option>
+              </select>
+            </label>
+          </form>
+        </div>
+        <button onClick={getData}>Check Availabilty</button>
       </div>
     </div>
   );

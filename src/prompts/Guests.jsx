@@ -1,4 +1,5 @@
 import React from "react";
+import { rosybrown } from "color-name";
 
 function Guests({
   handleChange,
@@ -6,8 +7,22 @@ function Guests({
   party,
   children,
   birthday,
-  birthdayName
+  birthdayName,
+  region
 }) {
+  const maxPartySize = {
+    MainHall: 12,
+    Bar: 4,
+    Riverside: 8,
+    RiversideSmoking: 6
+  };
+  let nums = [];
+  let i = 0;
+  while (i < maxPartySize[region]) {
+    i++;
+    nums.push(i);
+  }
+
   return (
     <div>
       <div className="prompt">
@@ -15,7 +30,16 @@ function Guests({
           <label>
             How many guests in your party?
             <select name="party" value={party} onChange={handleChange}>
-              <option value="1">1</option>
+              <option defaultValue>0</option>
+              {nums.map(item => {
+                return (
+                  <option key={item} value={item}>
+                    {" "}
+                    {item}{" "}
+                  </option>
+                );
+              })}
+              {/* <option value="1">1</option>
               <option value="2">2</option>
               <option value="3">3</option>
               <option value="4">4</option>
@@ -26,7 +50,7 @@ function Guests({
               <option value="9">9</option>
               <option value="10">10</option>
               <option value="11">11</option>
-              <option value="12">12</option>
+              <option value="12">12</option> */}
             </select>
           </label>
         </form>
@@ -35,7 +59,16 @@ function Guests({
         <form>
           <label>How Many Children will be in your party?</label>
           <select name="children" value={children} onChange={handleChange}>
-            <option value="0">0</option>
+            <option defaultValue>0</option>
+            {nums.slice(0, nums.length - party).map(item => {
+              return (
+                <option key={item} value={item}>
+                  {" "}
+                  {item}{" "}
+                </option>
+              );
+            })}
+            {/* <option value="0">0</option>
             <option value="1">1</option>
             <option value="2">2</option>
             <option value="3">3</option>
@@ -45,9 +78,12 @@ function Guests({
             <option value="7">7</option>
             <option value="8">8</option>
             <option value="9">9</option>
-            <option value="10">10</option>
+            <option value="10">10</option> */}
           </select>
         </form>
+        {(region === "Bar" || region === "RiversideSmoking") && children > 0 ? (
+          <div>NO Children allowed in Bar/Smoking area</div>
+        ) : null}
       </div>
       <div className="prompt">
         <form>

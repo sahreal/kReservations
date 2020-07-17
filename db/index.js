@@ -2,20 +2,72 @@ const mongoose = require("mongoose");
 
 const Schema = mongoose.Schema;
 
-const Week = new Schema(
+const MainHall = new Schema(
   {
     date: {
       type: String,
-      time: {
-        type: String,
-        MainHall: Number,
-        Bar: Number,
-        Riverside: Number,
-        RiversideSmoking: Number
-      }
+      "6": Number,
+      "6:30": Number,
+      "7": Number,
+      "7:30": Number,
+      "8": Number,
+      "8:30": Number,
+      "9": Number,
+      "9:30": Number
     }
   },
-  { collection: "Week" }
+  { collection: "MainHall" }
+);
+
+const Bar = new Schema(
+  {
+    date: {
+      type: String,
+      "6": Number,
+      "6:30": Number,
+      "7": Number,
+      "7:30": Number,
+      "8": Number,
+      "8:30": Number,
+      "9": Number,
+      "9:30": Number
+    }
+  },
+  { collection: "Bar" }
+);
+
+const Riverside = new Schema(
+  {
+    date: {
+      type: String,
+      "6": Number,
+      "6:30": Number,
+      "7": Number,
+      "7:30": Number,
+      "8": Number,
+      "8:30": Number,
+      "9": Number,
+      "9:30": Number
+    }
+  },
+  { collection: "Riverside" }
+);
+
+const RiversideSmoking = new Schema(
+  {
+    date: {
+      type: String,
+      "6": Number,
+      "6:30": Number,
+      "7": Number,
+      "7:30": Number,
+      "8": Number,
+      "8:30": Number,
+      "9": Number,
+      "9:30": Number
+    }
+  },
+  { collection: "RiversideSmoking" }
 );
 
 const Reservations = new Schema(
@@ -33,5 +85,11 @@ const Reservations = new Schema(
   { collection: "Reservations" }
 );
 
-module.exports.Week = mongoose.model("Week", Week);
 module.exports.Reservations = mongoose.model("Reservations", Reservations);
+module.exports.MainHall = mongoose.model("MainHall", MainHall);
+module.exports.Bar = mongoose.model("Bar", Bar);
+module.exports.Riverside = mongoose.model("Riverside", Riverside);
+module.exports.RiversideSmoking = mongoose.model(
+  "RiversideSmoking",
+  RiversideSmoking
+);
