@@ -1,15 +1,8 @@
 import React from "react";
-import { rosybrown } from "color-name";
+import "../styles.css";
+//import { rosybrown } from "color-name";
 
-function Guests({
-  handleChange,
-  inputChange,
-  party,
-  children,
-  birthday,
-  birthdayName,
-  region
-}) {
+function Guests({ handleChange, party, children, region }) {
   const maxPartySize = {
     MainHall: 12,
     Bar: 4,
@@ -24,85 +17,41 @@ function Guests({
   }
 
   return (
-    <div>
-      <div className="prompt">
-        <form>
-          <label>
-            How many guests in your party?
-            <select name="party" value={party} onChange={handleChange}>
-              <option defaultValue>0</option>
-              {nums.map(item => {
-                return (
-                  <option key={item} value={item}>
-                    {" "}
-                    {item}{" "}
-                  </option>
-                );
-              })}
-              {/* <option value="1">1</option>
-              <option value="2">2</option>
-              <option value="3">3</option>
-              <option value="4">4</option>
-              <option value="5">5</option>
-              <option value="6">6</option>
-              <option value="7">7</option>
-              <option value="8">8</option>
-              <option value="9">9</option>
-              <option value="10">10</option>
-              <option value="11">11</option>
-              <option value="12">12</option> */}
-            </select>
-          </label>
-        </form>
-      </div>
-      <div className="prompt">
-        <form>
-          <label>How Many Children will be in your party?</label>
-          <select name="children" value={children} onChange={handleChange}>
-            <option defaultValue>0</option>
-            {nums.slice(0, nums.length - party).map(item => {
-              return (
-                <option key={item} value={item}>
-                  {" "}
-                  {item}{" "}
-                </option>
-              );
-            })}
-            {/* <option value="0">0</option>
-            <option value="1">1</option>
-            <option value="2">2</option>
-            <option value="3">3</option>
-            <option value="4">4</option>
-            <option value="5">5</option>
-            <option value="6">6</option>
-            <option value="7">7</option>
-            <option value="8">8</option>
-            <option value="9">9</option>
-            <option value="10">10</option> */}
-          </select>
-        </form>
-        {(region === "Bar" || region === "RiversideSmoking") && children > 0 ? (
-          <div>NO Children allowed in Bar/Smoking area</div>
-        ) : null}
-      </div>
-      <div className="prompt">
-        <form>
-          <label>
-            Is anyone in your party be celebrating a birthday?
-            <select name="birthday" value={birthday} onChange={handleChange}>
-              <option value={false}>No</option>
-              <option value={true}>Yes</option>
-            </select>
-          </label>
-          <input
-            type="text"
-            name="birthdayName"
-            value={birthdayName}
-            onChange={inputChange}
-            placeholder="Optional: please enter their name"
-          />
-        </form>
-      </div>
+    <div className="selectors">
+      <form>
+        <label>How many guests in your party? </label>
+        <select name="party" value={party} onChange={handleChange}>
+          <option defaultValue>0</option>
+          {nums.map(item => {
+            return (
+              <option key={item} value={item}>
+                {" "}
+                {item}{" "}
+              </option>
+            );
+          })}
+        </select>
+      </form>
+      <form>
+        <label>How Many Children will be in your party?</label>
+        <select name="children" value={children} onChange={handleChange}>
+          <option defaultValue>0</option>
+          {nums.slice(0, nums.length - party).map(item => {
+            return (
+              <option key={item} value={item}>
+                {" "}
+                {item}{" "}
+              </option>
+            );
+          })}
+        </select>
+      </form>
+      {(region === "Bar" || region === "RiversideSmoking") && children > 0 ? (
+        <div className="child-warning">
+          Children are not permitted in the Bar or Smoking area. Please Select
+          Another seating area of remove children from your party.
+        </div>
+      ) : null}
     </div>
   );
 }

@@ -1,11 +1,22 @@
 import React from "react";
 import { useHistory, useLocation } from "react-router-dom";
+import axios from "axios";
 
 const Confirmed = () => {
   const location = useLocation();
   const state = location.data;
-
+  console.log(state, "confirmedstate");
   const history = useHistory();
+
+  const bookReservation = () => {
+    axios.post("/update", {
+      date: state.date,
+      region: state.region,
+      time: state.time,
+      party: state.party,
+      children: state.children
+    });
+  };
 
   const submitHandler = () => {
     localStorage.clear();
@@ -13,6 +24,7 @@ const Confirmed = () => {
       pathname: "/final",
       data: state
     });
+    bookReservation();
   };
 
   return (

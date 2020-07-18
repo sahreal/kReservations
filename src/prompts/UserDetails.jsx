@@ -12,8 +12,8 @@ const UserDetails = ({ inputChange, name, phone, email }) => {
     return regex.test(input);
   };
   return (
-    <div>
-      <div className="prompt">
+    <div className="user-details">
+      <div className="user-input">
         <form>
           <label>Please enter your name:</label>
           <input
@@ -25,7 +25,10 @@ const UserDetails = ({ inputChange, name, phone, email }) => {
           />
         </form>
       </div>
-      <div className="prompt">
+      <div className="user-input">
+        {email.length > 0 && !validateEmail(email) ? (
+          <p>*Please enter a valid email</p>
+        ) : null}
         <form>
           <label>Please enter your email:</label>
           <input
@@ -36,11 +39,11 @@ const UserDetails = ({ inputChange, name, phone, email }) => {
             onChange={inputChange}
           />
         </form>
-        {email.length > 0 && !validateEmail(email) ? (
-          <div>Please enter a valid email</div>
-        ) : null}
       </div>
-      <div className="prompt">
+      <div className="user-input">
+        {phone.length > 0 && !validatePhone(phone) ? (
+          <p>*Please enter a valid phone number</p>
+        ) : null}
         <form>
           <label>Please enter your phone number:</label>
           <input
@@ -53,9 +56,6 @@ const UserDetails = ({ inputChange, name, phone, email }) => {
             onChange={inputChange}
           />
         </form>
-        {phone.length > 0 && !validatePhone(phone) ? (
-          <div>Please enter a valid phone number</div>
-        ) : null}
       </div>
     </div>
   );

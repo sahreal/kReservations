@@ -33,26 +33,64 @@ const maxCapacity = {
 module.exports = {
   commands: {
     getAll: (req, res) => {
-      console.log(req.query);
       let date = req.query.date;
       let room = req.query.region;
       let time = req.query.time;
+      let totalGuests =
+        parseInt(req.query.party) + parseInt(req.query.children);
       region[room]
         .findOne({ id: date }, async function(err, results) {
           if (err) {
             return console.error(err);
           } else {
             try {
-              let temp = await results.toObject();
+              let capacity = await results.toObject();
+              if (maxCapacity[room] > capacity[time] + totalGuests) {
+                res.send({ response: "available" }).status(201);
+              } else {
+                [time, "_id", "id"].forEach(item => delete capacity[item]);
+                for (let timeSlot in capacity) {
+                  let result = maxCapacity[room] - capacity[timeSlot];
+                  if (result <= 0 || !Number.isInteger(capacity[timeSlot])) {
+                    delete capacity[timeSlot];
+                  } else {
+                    capacity[timeSlot] = result;
+                  }
+                }
 
-              console.log(temp[time], "avail");
-              res.send(temp).status(201);
+                res
+                  .send({ response: "unavailable", options: capacity })
+                  .status(201);
+              }
             } catch (err) {
               console.log(err, "Get promise error");
             }
           }
         })
         .exec();
+    },
+    update: (req, res) => {
+      let date = req.body.date;
+      let room = req.body.region;
+      let time = req.body.time;
+      let totalGuests = Number(req.body.party) + Number(req.body.children);
+
+      region[room].collection.findOneAndUpdate(
+        { id: date },
+        { $inc: { [time]: totalGuests } },
+        { new: true },
+        async function(err, results) {
+          if (err) {
+            return console.error(err);
+          } else {
+            try {
+              res.status(201);
+            } catch (err) {
+              console.log(err, "Get promise error");
+            }
+          }
+        }
+      );
     }
   }
 };
