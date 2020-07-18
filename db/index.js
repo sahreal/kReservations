@@ -6,7 +6,7 @@ const MainHall = new Schema(
   {
     date: {
       type: String,
-      "6": Number,
+      "6": { type: Number, default: 0 },
       "6:30": Number,
       "7": Number,
       "7:30": Number,

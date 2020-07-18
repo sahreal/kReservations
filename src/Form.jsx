@@ -2,8 +2,9 @@ import React, { PureComponent } from "react";
 import ConfirmButton from "./ConfirmButton";
 import DateTime from "./prompts/DateTime";
 import UserDetails from "./prompts/UserDetails";
-import Guests from "./prompts/Guests";
+import Birthday from "./prompts/Birthday";
 import Seating from "./prompts/Seating";
+import OtherAvailableTimes from "./OtherAvailableTimes";
 import axios from "axios";
 import "./styles.css";
 
@@ -11,22 +12,28 @@ class Form extends PureComponent {
   constructor(props) {
     super(props);
     this.state = {
-      date: "July-24",
+      date: "",
       time: "",
       name: "",
       phone: "",
       email: "",
       party: 0,
-      region: "MainHall",
+      region: "",
       children: 0,
       smoking: false,
       birthday: false,
       birthdayName: "",
-      totalGuests: 0
+      totalGuests: 0,
+      noSpace: false,
+      schedule: {},
+      warning: false,
+      extraTimes: false,
+      spaceAvailable: false
     };
 
     this.handleChange = this.handleChange.bind(this);
     this.inputChange = this.inputChange.bind(this);
+    this.updateNewTime = this.updateNewTime.bind(this);
     this.getData = this.getData.bind(this);
   }
 
@@ -45,35 +52,66 @@ class Form extends PureComponent {
         smoking: newState.smoking,
         birthday: newState.birthday,
         birthdayName: newState.birthdayName,
+        spaceAvailable: newState.spaceAvailable,
         totalGuests: newState.totalGuests
       });
     }
   }
 
   getData() {
-    return axios
-      .get("/getAll", {
-        params: {
-          date: this.state.date,
-          region: this.state.region,
-          time: this.state.time
-        }
-      })
-      .then(result => console.log(result.data, "data"))
-      .catch(err => console.log(err, "getAll error"));
+    if (
+      this.state.date &&
+      this.state.time &&
+      this.state.region &&
+      this.state.party
+    ) {
+      return axios
+        .get("/getAll", {
+          params: {
+            date: this.state.date,
+            region: this.state.region,
+            time: this.state.time,
+            party: this.state.party,
+            children: this.state.children
+          }
+        })
+        .then(result => {
+          console.log(result.data, "data");
+          if (result.data.response === "unavailable") {
+            this.setState({
+              schedule: result.data.options,
+              extraTimes: true,
+              spaceAvailable: false,
+              warning: false
+            });
+          } else {
+            this.setState({ spaceAvailable: true, warning: false });
+          }
+        })
+        .catch(err => {
+          console.log(err, "getAll error");
+        });
+    } else {
+      this.setState({ warning: true });
+      return "this didnt work";
+    }
+  }
+  updateNewTime(newTime) {
+    this.setState({ time: newTime, extraTimes: false, spaceAvailable: true });
   }
 
   handleChange(e) {
     let name = e.target.name;
     let value = e.target.value;
 
-    if (name === "party" || name === "children") {
-      this.setState({
-        totalGuests: this.state.totalGuests + Number(value),
-        [name]: value
-      });
-    } else {
+    if (this.state.region !== "RiversideSmoking" && this.state.region !== "") {
+      this.setState({ smoking: false });
+    }
+
+    if (name === "birthday" || name === "smoking") {
       this.setState({ [name]: value });
+    } else {
+      this.setState({ [name]: value, spaceAvailable: false, warning: false });
     }
   }
 
@@ -86,39 +124,60 @@ class Form extends PureComponent {
   }
 
   render() {
-    console.log(this.state.children, "children");
     const state = this.state;
     return (
       <div className="card">
-        <DateTime
+        <UserDetails
           handleChange={this.handleChange}
-          region={state.region}
-          children={state.children}
-          date={state.date}
-          time={state.time}
-          getData={this.getData}
+          inputChange={this.inputChange}
+          name={state.name}
+          email={state.email}
+          phone={state.phone}
         />
+        <Birthday
+          handleChange={this.handleChange}
+          inputChange={this.inputChange}
+          birthday={state.birthday}
+          birthdayName={state.birthdayName}
+        />
+        <div className="date-time">
+          <DateTime
+            handleChange={this.handleChange}
+            inputChange={this.inputChange}
+            region={state.region}
+            children={state.children}
+            party={state.party}
+            date={state.date}
+            time={state.time}
+            getData={this.getData}
+          />
+          {state.extraTimes && Object.keys(state.schedule).length > 0 ? (
+            <OtherAvailableTimes
+              schedule={state.schedule}
+              party={state.party}
+              children={state.children}
+              updateNewTime={this.updateNewTime}
+            />
+          ) : state.spaceAvailable ? (
+            <div className="space-available"> Available</div>
+          ) : state.warning ? (
+            <div className="center">
+              <button style={{ background: "red" }} onClick={this.getData}>
+                Please Fill in all required prompts
+              </button>
+            </div>
+          ) : (
+            <div className="center">
+              <button onClick={this.getData}>Check Availabilty</button>
+            </div>
+          )}
+        </div>
         <Seating
           handleChange={this.handleChange}
           region={state.region}
           smoking={state.smoking}
           children={state.children}
           region={state.region}
-        />
-        <Guests
-          handleChange={this.handleChange}
-          inputChange={this.inputChange}
-          party={state.party}
-          children={state.children}
-          birthday={state.birthday}
-          birthdayName={state.birthdayName}
-          region={state.region}
-        />
-        <UserDetails
-          inputChange={this.inputChange}
-          name={state.name}
-          email={state.email}
-          phone={state.phone}
         />
 
         <ConfirmButton state={state} />
