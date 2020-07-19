@@ -1,5 +1,6 @@
 import React from "react";
 import { useHistory, useLocation } from "react-router-dom";
+import axios from "axios";
 
 const Review = () => {
   const location = useLocation();
@@ -7,41 +8,101 @@ const Review = () => {
 
   const history = useHistory();
 
-  const submitHandler = e => {
-    let pathname = e.target.value === "confirm" ? "/confirm" : "/";
-    localStorage.setItem("rez", JSON.stringify(state));
-    history.push({
-      pathname: pathname,
-      data: state
+  const bookReservation = () => {
+    axios.post("/update", {
+      date: state.date,
+      region: state.region,
+      time: state.time,
+      party: state.party,
+      children: state.children
     });
+  };
+
+  const phoneStyler = num => {
+    let firstThree = number => number.slice(0, 3);
+    let nextThree = number => number.slice(3, 6);
+    let lastFour = number => number.slice(6, number.length);
+    let result = "";
+
+    if (num.includes("-")) {
+      num = num.split("-").join("");
+      result = `(${firstThree(num)})-${nextThree(num)}-${lastFour(num)} `;
+    } else {
+      result = `(${firstThree(num)})-${nextThree(num)}-${lastFour(num)} `;
+    }
+
+    return result;
+  };
+  let formattedPhone = phoneStyler(state.phone);
+
+  const submitHandler = e => {
+    let pathname = e.target.value;
+    if (pathname === undefined) {
+      localStorage.setItem("rez", JSON.stringify(state));
+      history.push({
+        pathname: "/",
+        data: state
+      });
+    } else {
+      state.phone = formattedPhone;
+      bookReservation();
+      history.push({
+        pathname: pathname,
+        data: state
+      });
+    }
   };
 
   return (
     <div>
-      <h2>REVIEW PAGE</h2>
-      <div className="card">
-        <div className="prompt">Date: {state.date}</div>
-        <div className="prompt">Time: {state.time}pm</div>
-        <div className="prompt">Name: {state.name}</div>
-        <div className="prompt">Email: {state.email}</div>
-        <div className="prompt">Phone Number: {state.phone}</div>
-        <div className="prompt">Number of Guests: {state.party} people</div>
-        <div className="prompt">Number of Children: {state.children} </div>
-        <div className="prompt">Seating Area: {state.region}</div>
-        <div className="prompt">Smokers: {state.smoking ? "Yes" : "No"} </div>
-        <div className="prompt">
-          Birthdays:{" "}
-          {state.birthday ? `Yes, celebrating for ${state.birthdayName}` : "No"}
+      <div style={{ alignItems: "center" }} className="card">
+        <h2>Review Your Reservation</h2>
+        <h3 style={{ color: "black" }}>Click to update any information</h3>
+        <div className="prompt" value="edit" onClick={submitHandler}>
+          Date: <span>{state.date}</span>
         </div>
+        <div className="prompt" value="edit" onClick={submitHandler}>
+          Time: <span>{state.time}pm</span>
+        </div>
+        <div className="prompt" value="edit" onClick={submitHandler}>
+          Name: <span>{state.name}</span>
+        </div>
+        <div className="prompt" value="edit" onClick={submitHandler}>
+          Email: <span>{state.email}</span>
+        </div>
+        <div className="prompt" value="edit" onClick={submitHandler}>
+          Phone Number: <span>{formattedPhone}</span>
+        </div>
+        <div className="prompt" value="edit" onClick={submitHandler}>
+          Number of Guests: <span>{state.party} people</span>
+        </div>
+        <div className="prompt" value="edit" onClick={submitHandler}>
+          Number of Children: <span>{state.children} </span>
+        </div>
+        <div className="prompt" value="edit" onClick={submitHandler}>
+          Seating Area: <span>{state.region}</span>
+        </div>
+        <div className="prompt" value="edit" onClick={submitHandler}>
+          Smokers: <span>{state.smoking ? "Yes" : "No"}</span>{" "}
+        </div>
+        <div className="prompt" value="edit" onClick={submitHandler}>
+          Birthdays:{" "}
+          <span>
+            {state.birthday
+              ? `Yes ${
+                  state.birthdayName
+                    ? `, Birthday for: ${state.birthdayName}`
+                    : ""
+                }`
+              : "No"}
+          </span>
+        </div>
+
+        <button value="confirm" onClick={submitHandler}>
+          {" "}
+          Confirm{" "}
+        </button>
       </div>
-      <button value="edit" onClick={submitHandler}>
-        {" "}
-        Edit{" "}
-      </button>
-      <button value="confirm" onClick={submitHandler}>
-        {" "}
-        Confirm{" "}
-      </button>
     </div>
   );
 };

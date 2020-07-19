@@ -1,54 +1,120 @@
 body {
-  height: 100vh;
-  width: 100vw;
-  margin: 0;
+  height: auto;
+  width: auto;
+  margin: auto;
   background-size: cover;
-  overflow-x: hidden;
   background: linear-gradient(
-    0deg,
-    rgba(255, 255, 255, 1) 0%,
-    rgba(250, 244, 170, 1) 0%,
-    rgba(227, 179, 33, 1) 81%,
-    rgba(213, 133, 3, 1) 100%
+    9deg,
+    rgba(229, 243, 255, 1) 0%,
+    rgba(135, 201, 249, 1) 53%,
+    rgba(87, 154, 252, 1) 100%
   );
 }
 
 h1 {
-  color: black;
-  margin-left: 30px;
+  color: aliceblue;
+  text-align: center;
+  font-size: 50px;
+}
+
+.nav-bar {
+  background: #2982c1;
+  padding: 20px;
+  width: 100%;
+  position: fixed;
+  top: 0px;
+}
+
+.provide-details {
+  text-align: center;
+  margin: 0;
+  font-size: xx-large;
+  padding-top: 20px;
+  padding-bottom: 10px;
 }
 
 .card {
-  background: rgb(255, 238, 203);
+  background: aliceblue;
   display: flex;
   flex-direction: column;
   margin-left: 20%;
   margin-right: 20%;
   padding: 10px;
-  box-shadow: 10px 10px 10px #806200;
+  box-shadow: 10px 10px 10px rgb(32, 52, 53);
+}
+
+.confirmed-prompt {
+  border-radius: 4px;
+  background-color: cadetblue;
+  box-shadow: 10px 10px 10px rgb(32, 52, 53);
+  border: none;
+  color: #ffffff;
+  text-align: center;
+  font-size: 28px;
+  padding: 20px;
+  position: relative;
+  transition: all 0.5s;
+  margin-left: auto;
+  margin-right: auto;
+  width: 40%;
+  margin: 5px;
+}
+.prompt {
+  border-radius: 4px;
+  background-color: cadetblue;
+  border: none;
+  color: #ffffff;
+  text-align: center;
+  font-size: 28px;
+  padding: 20px;
+  position: relative;
+  transition: all 0.5s;
+  margin-left: auto;
+  margin-right: auto;
+  width: 40%;
+  cursor: pointer;
+  margin: 5px;
+}
+
+.prompt span {
+  cursor: pointer;
+  display: inline-block;
+  position: relative;
+  transition: 0.5s;
+}
+
+.prompt span:after {
+  content: "\00bb \ edit";
+  position: absolute;
+  color: black;
+  opacity: 0;
+  top: 0;
+  right: -80px;
+  transition: 1s;
+}
+
+.propmpt:after {
+  width: 100%;
+}
+
+.prompt:hover span {
+  padding-right: 105px;
+}
+
+.prompt:hover span:after {
+  opacity: 1;
+  right: 0;
 }
 
 .date-time {
-  border-style: dashed;
+  border: solid 30px cadetblue;
+  background: aliceblue;
   padding: 10px;
 }
 
 .selectors {
   text-align: center;
   display: flex;
-}
-
-.availablity {
-  background-color: green;
-}
-
-.seating {
-  margin: 20px;
-}
-.smokers {
-  /* display: flex;
-  justify-content: center;
-  padding: 20px 0px 20px 50px; */
 }
 
 .smokers label {
@@ -59,8 +125,9 @@ h1 {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-evenly;
-  border-style: groove;
-  margin: 20px;
+  border: solid 30px cadetblue;
+  background: aliceblue;
+  padding: 10px;
 }
 
 input[type="text"] {
@@ -86,7 +153,6 @@ input[type="text"]:focus {
 
 button {
   width: 30%;
-  background-color: #4caf50;
   color: white;
   padding: 14px 20px;
   margin: 18px 0;
@@ -94,18 +160,19 @@ button {
   cursor: pointer;
   outline: none;
   color: #fff;
-  background-color: #4caf50;
+  background-color: #2982c1;
+  font-size: 20px;
   border: none;
   border-radius: 15px;
   box-shadow: 0 9px #999;
 }
 
 button:hover {
-  background-color: #3e8e41;
+  background-color: #05385c;
 }
 
 button:active {
-  background-color: #3e8e41;
+  background-color: #2982c1;
   box-shadow: 0 5px #666;
   transform: translateY(4px);
 }
@@ -118,6 +185,7 @@ button:active {
 p {
   text-align: center;
   color: red;
+  font-size: 25px;
   font-style: italic;
 }
 
@@ -125,7 +193,7 @@ p {
   text-align: center;
   margin: 20px;
   font-size: 30px;
-  color: limegreen;
+  color: #05385c;
 }
 
 select {
@@ -171,7 +239,6 @@ option {
   color: lightslategray;
   font-size: 20px;
   border-style: double;
-  margin: 30px;
   padding: 20px;
 }
 
@@ -189,14 +256,11 @@ form {
 .child-warning {
   background: aliceblue;
   position: fixed;
-  width: 500px;
-  top: 42%;
-  left: 50%;
+  width: 100vh;
+  top: 730px;
+  left: 592px;
   font-size: x-large;
-  margin-top: -100px;
-  margin-left: -250px;
-  text-align: center;
-  padding: 73px 20px;
+  padding: 90px 100px;
   animation: fade1 0.5s;
   border: 5px solid orange;
   z-index: 1;
@@ -215,4 +279,49 @@ form {
   100% {
     opacity: 1;
   }
+}
+
+/*--------DEV TOOLS ------*/
+h3 {
+  color: white;
+  text-align: center;
+}
+
+h4 {
+  color: white;
+}
+
+.dev-panel {
+  width: 20%;
+  position: absolute;
+  top: 90px;
+  right: -95px;
+}
+
+.open-dev-panel {
+  position: fixed;
+  background: #2a82c1;
+  flex-direction: column;
+  padding: 30px;
+  border: solid 5px black;
+  height: 800;
+  text-align: start;
+}
+
+.dev-button {
+  color: white;
+  padding: 14px 20px;
+  margin: 18px 20px;
+  cursor: pointer;
+  outline: none;
+  color: #fff;
+  background-color: #6f6f6f;
+  font-size: 15px;
+  border: none;
+  border-radius: 15px;
+  box-shadow: 0 4px #999;
+}
+
+.dev-button:hover {
+  background-color: #333333;
 }

@@ -1,6 +1,5 @@
 import React from "react";
 import "../styles.css";
-//import { rosybrown } from "color-name";
 
 function Guests({ handleChange, party, children, region }) {
   const maxPartySize = {
@@ -48,8 +47,8 @@ function Guests({ handleChange, party, children, region }) {
       </form>
       {(region === "Bar" || region === "RiversideSmoking") && children > 0 ? (
         <div className="child-warning">
-          Children are not permitted in the Bar or Smoking area. Please Select
-          Another seating area of remove children from your party.
+          <p>Children are not permitted in the Bar or Smoking area.</p>
+          Please Select Another seating area of remove children from your party.
         </div>
       ) : null}
     </div>
