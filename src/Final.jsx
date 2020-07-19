@@ -15,13 +15,8 @@ const Final = () => {
   };
 
   return (
-    <div>
-      <h2>See You There!</h2>
-      <div className="card">
-        THANKS FOR BOOKING A RESSERVATION WITH US {state.name}! We'll se you on{" "}
-        {state.date} at {state.time}
-        <button onClick={submitHandler}>Make Another Reservation</button>
-      </div>
+    <div style={{ width: "100%", textAlign: "center" }}>
+      <button onClick={submitHandler}>Make Another Reservation</button>
     </div>
   );
 };

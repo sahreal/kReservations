@@ -15,12 +15,15 @@ const DateTime = ({
   const capacity = {
     MainHall: "12 people",
     Bar: "4 people",
-    Riverside: "6 people",
-    RiversideSmoking: "8 people"
+    Riverside: "8 people",
+    RiversideSmoking: "6 people"
   };
   return (
     <div className="availablity">
-      <div className="user-details">
+      <div
+        style={{ background: "none", border: "none" }}
+        className="user-details"
+      >
         <div className="user-input">
           <form>
             <label>Please Select a Reservation Date: </label>
@@ -72,20 +75,20 @@ const DateTime = ({
                   : " Riverside Smoking Section"}
               </option>
             </select>
-            {region !== "" ? (
-              <p
-                style={{
-                  fontStyle: "normal",
-                  fontSize: "15px",
-                  color: "white"
-                }}
-              >
-                The area can accomidate parties of {capacity[region]}
-              </p>
-            ) : null}
           </form>
         </div>
       </div>
+      {region !== "" ? (
+        <p
+          style={{
+            fontStyle: "normal",
+            fontSize: "20px",
+            color: "cadetblue"
+          }}
+        >
+          This seating area can accomidate parties of {capacity[region]}
+        </p>
+      ) : null}
       <Guests
         handleChange={handleChange}
         inputChange={inputChange}
