@@ -2,8 +2,6 @@ import React from "react";
 import "./styles.css";
 
 const NewTime = ({ time, updateNewTime }) => {
-  console.log(time, "timeNEW");
-
   const handleClick = () => {
     updateNewTime(time);
   };

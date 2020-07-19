@@ -1,10 +1,7 @@
 import React from "react";
-import { useHistory, useLocation } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 
 const Final = () => {
-  const location = useLocation();
-  const state = location.data;
-
   const history = useHistory();
 
   const submitHandler = () => {

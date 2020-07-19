@@ -57,5 +57,3 @@ function Confirm({ state }) {
 }
 
 export default Confirm;
-
-//disabled={!state.date || !state.time || !state.party ? true : false}
