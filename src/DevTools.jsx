@@ -15,12 +15,7 @@ const DevTools = () => {
   };
 
   const clearRoom = str => {
-    axios
-      .delete("/clearRoom", { data: { room: str } })
-      .then(() => {
-        console.log("hey");
-      })
-      .catch(err => console.log(err));
+    axios.delete("/clearRoom", { data: { room: str } });
   };
 
   const clearDatabase = () => {

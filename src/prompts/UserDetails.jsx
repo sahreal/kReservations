@@ -1,4 +1,5 @@
 import React from "react";
+import "react-phone-number-input/style.css";
 import "../styles.css";
 
 const UserDetails = ({ inputChange, name, phone, email }) => {
@@ -11,6 +12,7 @@ const UserDetails = ({ inputChange, name, phone, email }) => {
     const regex = /^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$/;
     return regex.test(input);
   };
+
   return (
     <div className="user-details">
       <div className="user-input">
@@ -49,9 +51,9 @@ const UserDetails = ({ inputChange, name, phone, email }) => {
           <input
             type="text"
             name="phone"
-            placeholder="enter phone number"
+            placeholder="xxx-xxx-xxxx"
             id="phoneNumber"
-            maxLength="12"
+            maxLength="14"
             value={phone}
             onChange={inputChange}
           />

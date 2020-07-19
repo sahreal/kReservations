@@ -4,25 +4,30 @@ import Form from "./Form";
 import Review from "./Review";
 import Confirmed from "./Confirmed";
 import Final from "./Final";
+import DevTools from "./DevTools";
 
 const App = () => {
-  const submitHandler = () => {
-    localStorage.clear();
-  };
   return (
     <div>
-      <h1>kReservations</h1>
-      <button onClick={submitHandler}>Clear Local</button>
-      <Router>
-        <div>
-          <Switch>
-            <Route exact path="/final" component={Final} />
-            <Route exact path="/confirm" component={Confirmed} />
-            <Route exact path="/review" component={Review} />
-            <Route exact path="/" component={Form} />
-          </Switch>
-        </div>
-      </Router>
+      <div className="nav-bar">
+        <h1>kReservations</h1>
+        <DevTools />
+      </div>
+      <div
+        style={{
+          marginTop: "5%"
+        }}
+      >
+        <Router>
+          <div>
+            <Switch>
+              <Route exact path="/confirm" component={Confirmed} />
+              <Route exact path="/review" component={Review}></Route>
+              <Route exact path="/" component={Form} />
+            </Switch>
+          </div>
+        </Router>
+      </div>
     </div>
   );
 };

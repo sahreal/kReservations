@@ -28,7 +28,8 @@ class Form extends PureComponent {
       schedule: {},
       warning: false,
       extraTimes: false,
-      spaceAvailable: false
+      spaceAvailable: false,
+      fullCapacity: false
     };
 
     this.handleChange = this.handleChange.bind(this);
@@ -76,16 +77,30 @@ class Form extends PureComponent {
           }
         })
         .then(result => {
-          console.log(result.data, "data");
-          if (result.data.response === "unavailable") {
+          let capacity = result.data.options;
+          let response = result.data.response;
+
+          if (response === "available") {
+            this.setState({ spaceAvailable: true, warning: false });
+          }
+
+          if (typeof capacity === "string") {
+            this.setState({
+              schedule: capacity,
+              fullCapacity: true,
+              extraTimes: true,
+              spaceAvailable: false,
+              warning: false
+            });
+          }
+
+          if (response === "unavailable") {
             this.setState({
               schedule: result.data.options,
               extraTimes: true,
               spaceAvailable: false,
               warning: false
             });
-          } else {
-            this.setState({ spaceAvailable: true, warning: false });
           }
         })
         .catch(err => {
@@ -93,7 +108,6 @@ class Form extends PureComponent {
         });
     } else {
       this.setState({ warning: true });
-      return "this didnt work";
     }
   }
   updateNewTime(newTime) {
@@ -101,9 +115,13 @@ class Form extends PureComponent {
   }
 
   handleChange(e) {
+    this.setState({
+      schedule: {},
+      extraTimes: false,
+      fullCapacity: false
+    });
     let name = e.target.name;
     let value = e.target.value;
-
     if (this.state.region !== "RiversideSmoking" && this.state.region !== "") {
       this.setState({ smoking: false });
     }
@@ -118,6 +136,7 @@ class Form extends PureComponent {
   inputChange(event) {
     let name = event.target.name;
     let value = event.target.value;
+
     this.setState({
       [name]: value
     });
@@ -127,6 +146,7 @@ class Form extends PureComponent {
     const state = this.state;
     return (
       <div className="card">
+        <h2 className="provide-details">Please Provide Your Details:</h2>
         <UserDetails
           handleChange={this.handleChange}
           inputChange={this.inputChange}
@@ -156,13 +176,14 @@ class Form extends PureComponent {
               schedule={state.schedule}
               party={state.party}
               children={state.children}
+              fullCapacity={state.fullCapacity}
               updateNewTime={this.updateNewTime}
             />
           ) : state.spaceAvailable ? (
             <div className="space-available"> Available</div>
           ) : state.warning ? (
             <div className="center">
-              <button style={{ background: "red" }} onClick={this.getData}>
+              <button style={{ background: "#ab6600" }} onClick={this.getData}>
                 Please Fill in all required prompts
               </button>
             </div>

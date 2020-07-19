@@ -1,16 +1,13 @@
 import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
 import "./styles.css";
-import { set } from "mongoose";
 
 function Confirm({ state }) {
   const [open, setOpen] = useState(false);
   const history = useHistory();
 
   const submitHandler = () => {
-    console.log(state, "before");
     state.spaceAvailable = true;
-    console.log(state, "after");
 
     history.push({
       pathname: "/review",
@@ -26,8 +23,6 @@ function Confirm({ state }) {
     }
   };
 
-  console.log(state.spaceAvailable, "STATE");
-
   return (
     <div className="center">
       {!state.date ||
@@ -39,7 +34,7 @@ function Confirm({ state }) {
       !state.phone ? (
         <div>
           {open ? (
-            <button style={{ background: "red" }} onClick={toggle}>
+            <button style={{ background: "#ab6600" }} onClick={toggle}>
               Please enter all missing fields
             </button>
           ) : (
@@ -52,7 +47,7 @@ function Confirm({ state }) {
         </div>
       ) : (
         <div>
-          <button style={{ background: "red" }} disabled>
+          <button style={{ background: "#ab6600" }} disabled>
             Please check for Availablity
           </button>
         </div>
