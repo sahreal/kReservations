@@ -48,7 +48,7 @@ function Guests({ handleChange, party, children, region }) {
       {(region === "Bar" || region === "RiversideSmoking") && children > 0 ? (
         <div className="child-warning">
           <p>Children are not permitted in the Bar or Smoking area.</p>
-          Please Select Another seating area of remove children from your party.
+          Please Select Another seating area or remove children from your party.
         </div>
       ) : null}
     </div>

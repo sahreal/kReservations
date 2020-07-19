@@ -5,7 +5,6 @@ import "../styles.css";
 const DateTime = ({
   handleChange,
   inputChange,
-  getData,
   region,
   party,
   children,

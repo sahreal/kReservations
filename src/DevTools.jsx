@@ -11,18 +11,11 @@ const DevTools = () => {
   };
 
   const selectChange = e => {
-    console.log(e.target.value, "value");
     setRoom(e.target.value);
   };
 
   const clearRoom = str => {
-    console.log(str, "huh");
-    axios
-      .delete("/clearRoom", { data: { room: str } })
-      .then(() => {
-        console.log("hey");
-      })
-      .catch(err => console.log(err));
+    axios.delete("/clearRoom", { data: { room: str } });
   };
 
   const clearDatabase = () => {
@@ -53,7 +46,7 @@ const DevTools = () => {
           <h3>Testing Tools:</h3>
           <h4>Clear local Storage:</h4>
           <button
-            style={{ margin: "0px" }}
+            style={{ margin: "0px", width: "50%" }}
             className="dev-button"
             onClick={submitHandler}
           >
@@ -67,7 +60,7 @@ const DevTools = () => {
             <option value="RiversideSmoking">Riverside Smoking</option>
           </select>
           <button
-            style={{ margin: "0px" }}
+            style={{ margin: "0px", width: "50%" }}
             className="dev-button"
             onClick={clearDatabase}
           >

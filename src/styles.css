@@ -11,6 +11,8 @@ body {
   );
 }
 
+/*<-----------App.js--------->*/
+
 h1 {
   color: aliceblue;
   text-align: center;
@@ -23,8 +25,10 @@ h1 {
   width: 100%;
   position: fixed;
   top: 0px;
+  z-index: 1;
 }
 
+/*<-----------FORM.jsx--------->*/
 .provide-details {
   text-align: center;
   margin: 0;
@@ -43,6 +47,7 @@ h1 {
   box-shadow: 10px 10px 10px rgb(32, 52, 53);
 }
 
+/*<-----------CONFRIMED.jsx--------->*/
 .confirmed-prompt {
   border-radius: 4px;
   background-color: cadetblue;
@@ -59,6 +64,9 @@ h1 {
   width: 40%;
   margin: 5px;
 }
+
+/*<-----------REVIEW.jsx--------->*/
+
 .prompt {
   border-radius: 4px;
   background-color: cadetblue;
@@ -106,15 +114,11 @@ h1 {
   right: 0;
 }
 
+/*<-----------DateTime.jsx +++ UserDetails.jsx--------->*/
 .date-time {
   border: solid 30px cadetblue;
   background: aliceblue;
   padding: 10px;
-}
-
-.selectors {
-  text-align: center;
-  display: flex;
 }
 
 .smokers label {
@@ -253,12 +257,17 @@ form {
   margin: 15px;
   flex: 1 1 250px;
 }
+
+/*<-----------GUESTS.jsx--------->*/
+.selectors {
+  text-align: center;
+  display: flex;
+}
+
 .child-warning {
   background: aliceblue;
   position: fixed;
-  width: 100vh;
-  top: 730px;
-  left: 592px;
+  top: 45%;
   font-size: x-large;
   padding: 90px 100px;
   animation: fade1 0.5s;
@@ -292,16 +301,17 @@ h4 {
 }
 
 .dev-panel {
-  width: 20%;
   position: absolute;
-  top: 90px;
-  right: -95px;
+  top: 80px;
+  right: 0px;
 }
 
 .open-dev-panel {
   position: fixed;
   background: #2a82c1;
+  display: flex;
   flex-direction: column;
+  align-items: center;
   padding: 30px;
   border: solid 5px black;
   height: 800;

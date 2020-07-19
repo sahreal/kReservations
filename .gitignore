@@ -1,5 +1,4 @@
 /config
-/package-lock.json
 /data
 mongo.js
 .cache/

@@ -84,6 +84,7 @@ class Form extends PureComponent {
             this.setState({ spaceAvailable: true, warning: false });
           }
 
+          //if the only thing returned is an empty object with a string, they are at max capacity
           if (typeof capacity === "string") {
             this.setState({
               schedule: capacity,
@@ -114,14 +115,17 @@ class Form extends PureComponent {
     this.setState({ time: newTime, extraTimes: false, spaceAvailable: true });
   }
 
+  //handles all selectors
   handleChange(e) {
+    let name = e.target.name;
+    let value = e.target.value;
+
     this.setState({
       schedule: {},
       extraTimes: false,
       fullCapacity: false
     });
-    let name = e.target.name;
-    let value = e.target.value;
+
     if (this.state.region !== "RiversideSmoking" && this.state.region !== "") {
       this.setState({ smoking: false });
     }
@@ -133,6 +137,7 @@ class Form extends PureComponent {
     }
   }
 
+  //handles all inputs
   inputChange(event) {
     let name = event.target.name;
     let value = event.target.value;
@@ -169,7 +174,6 @@ class Form extends PureComponent {
             party={state.party}
             date={state.date}
             time={state.time}
-            getData={this.getData}
           />
           {state.extraTimes && Object.keys(state.schedule).length > 0 ? (
             <OtherAvailableTimes

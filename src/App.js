@@ -3,7 +3,6 @@ import { Route, Switch, BrowserRouter as Router } from "react-router-dom";
 import Form from "./Form";
 import Review from "./Review";
 import Confirmed from "./Confirmed";
-import Final from "./Final";
 import DevTools from "./DevTools";
 
 const App = () => {

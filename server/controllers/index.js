@@ -23,17 +23,17 @@ const region = {
   RiversideSmoking: RiversideSmoking
 };
 
+//Set each room to their total capacity to test making reservations
 const maxCapacity = {
-  MainHall: 12,
-  Bar: 5,
-  Riverside: 5,
-  RiversideSmoking: 5
+  MainHall: 34,
+  Bar: 16,
+  Riverside: 10,
+  RiversideSmoking: 20
 };
 
 module.exports = {
   commands: {
     getAll: (req, res) => {
-      console.log(req.query, "req params");
       let date = req.query.date;
       let room = req.query.region;
       let time = req.query.time;
@@ -45,12 +45,8 @@ module.exports = {
             return console.error(err, "PROMISE ERROR");
           } else {
             try {
-              console.log(results, "WHAT IS HAPPENING HERE");
               let capacity = await results.toObject();
-              console.log(
-                maxCapacity[room] >= capacity[time] + totalGuests,
-                " room left"
-              );
+
               if (maxCapacity[room] >= capacity[time] + totalGuests) {
                 res.send({ response: "available" }).status(201);
               } else {
@@ -63,9 +59,10 @@ module.exports = {
                     capacity[timeSlot] = result;
                   }
                 }
+
                 let final =
                   Object.keys(capacity).length === 0 ? "booked" : capacity;
-                console.log(final, "getall controller");
+
                 res
                   .send({ response: "unavailable", options: final })
                   .status(201);
