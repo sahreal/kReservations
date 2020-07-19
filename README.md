@@ -40,7 +40,7 @@ running on localhost:3000
   ![AdjustCapacity](/ReadMeImages/maxCap.png)
 
 - DevTools: 
-  On the top right hand corner you should notice two buttons. These are not for the user, but are meant for me and You! Feel free to use run tests, by either: Clearing local storage, or refreshing the database and deleting reservations that are being submitted once you confirm a reservation.
+  On the top right hand corner you should notice two buttons. These are not for the user, but are meant for me and You! Feel free to use these to run tests by either: Clearing local storage, or refreshing the database and deleting reservations that are being submitted once you confirm a reservation.
 
 Close:
 
