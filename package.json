@@ -1,7 +1,7 @@
 {
   "name": "kReservation",
   "version": "1.0.0",
-  "description": "",
+  "description": "reservation booking app",
   "main": "index.js",
   "keywords": [],
   "author": "Sahar Adri",
