@@ -2,7 +2,7 @@
 
 A Full Stack Reservations Application
 
-A single page app to help users book reservations at their favorite restaurant, between half hour slots between 6pm-10pm during the week of July 24th - July 31st.
+A single page app to help users book reservations at their favorite restaurant during half hour slots between the hours of 6pm-10pm for the week of July 24th - July 31st.
 
 # How to get started
 
@@ -10,14 +10,14 @@ A single page app to help users book reservations at their favorite restaurant, 
 - install dependencies: `npm install`
 - Configure a .env file, using sample.env as a guide.
 - Run the following `npm` scripts concurrently:
-
   - Create build: `npm run build-dev`
   - Start the app: `npm run dev`
+
 
 ## Features
 
 - Database:
-  Using MongoDb atlas as database to store the availability during the half hour slots between restuarant hours. Each seating area is its own collection. The size adjusts when customers make reservations.
+  Using MongoDb atlas as a database to store the availability during the half hour slots. Each seating area is its own collection. The availability adjusts and is updated when customers confirm their reservations.
 
   ![Database](/ReadMeImages/mongoAtlas.png)
 
@@ -26,7 +26,8 @@ A single page app to help users book reservations at their favorite restaurant, 
 
   ![AdjustCapacity](/ReadMeImages/maxCap.png)
 
-- DevTools - on the top right hand corner you should notice two buttons in the top right corner. These are not for the user, but are met for my and You! Feel free to use run tests, by either: Clearing local storage, or refreshing the database and deleting reservations that are being submitted once you confirm a reservation.
+- DevTools: 
+  On the top right hand corner you should notice two buttons. These are not for the user, but are meant for me and You! Feel free to use these to run tests by either: Clearing local storage, or refreshing the database and deleting reservations that are being submitted once you confirm a reservation.
 
 Close:
 
@@ -36,9 +37,6 @@ Open:
 
 ![Opened](/ReadMeImages/open.png)
 
-## Running
-
-running on localhost:3000
 
 ## Tech Stack
 
@@ -48,13 +46,13 @@ running on localhost:3000
 - Webpack
 - Axios
 
-## Future considerations
+## Considerations/Future Considerations
+
+This was built on Chrome and I did not do cross-browser testing. Its not far from being mobile ready but could use some work, that would be the last step in really bringing this app full circle.
 
 I had built out a schema and database in order to build a way for the user to actually store and then later retrieve their confirmations, but wanted to focus on other aspects of this app.
 
-Its not far from being mobile ready but could use some work, that would be the last step in really bringing this app full circle.
-
-In the future, and in general, I tend to use styled components, but found that the inline styling wasnt to intense, so I ended up using pure CSS.
+In the future, and in general, I tend to use styled-components, but found that the inline styling wasnt too intense so I ended up using pure CSS.
 
 ## Credits
 
