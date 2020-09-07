@@ -10,6 +10,7 @@
     "clean": "rm dist/bundle.js",
     "build-dev": "webpack -d --mode development",
     "dev": "webpack -d --watch & nodemon -r dotenv/config server/index.js",
+    "db-start:dev": "docker-compose up --build -d",
     "build-prod": "webpack -p --mode production"
   },
   "dependencies": {
