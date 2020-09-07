@@ -6,7 +6,8 @@ const {
   MainHall,
   Reservations
 } = require("../../db/index");
-const uri = require("../../config/keys").mongoURI;
+const uri = process.env.DB_ACCESS;
+
 mongoose
   .connect(uri, {
     useNewUrlParser: true,

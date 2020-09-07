@@ -1,6 +1,7 @@
 /config
 /data
 mongo.js
+.env
 .cache/
 coverage/
 dist/*
