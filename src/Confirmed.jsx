@@ -12,7 +12,7 @@ const Confirmed = () => {
         <h2>CONFIRMED</h2>
         <h2>Thank You {state.name}! Your reservation has been confirmed.</h2>
         <h3 style={{ color: "black" }}>
-          We'll se you on {state.date} at {state.time}pm!
+          We'll see you on {state.date} at {state.time}pm!
         </h3>
         <div className="confirmed-prompt">Date: {state.date}</div>
         <div className="confirmed-prompt">Time: {state.time}pm</div>

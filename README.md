@@ -1,28 +1,18 @@
 # kReservations
 
-## Summary
+A Full Stack Reservations Application
 
 A single page app to help users book reservations at their favorite restaurant, between half hour slots between 6pm-10pm during the week of July 24th - July 31st.
 
-## Building and running on localhost
+# How to get started
 
-First install dependencies:
+- `git clone` the repo.
+- install dependencies: `npm install`
+- Configure a .env file, using sample.env as a guide.
+- Run the following `npm` scripts concurrently:
 
-```sh
-npm install
-```
-
-To create a build:
-
-```sh
-npm run build-dev
-```
-
-To create a development build:
-
-```sh
-npm run dev
-```
+  - Create build: `npm run build-dev`
+  - Start the app: `npm run dev`
 
 ## Features
 
