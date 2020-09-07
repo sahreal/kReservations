@@ -6,7 +6,11 @@ const {
   MainHall,
   Reservations
 } = require("../../db/index");
-const uri = process.env.DB_ACCESS;
+
+let dbAccess =
+  "mongodb+srv://guest:GHk4on6rNKW7Us6g@cluster0.i0avb.mongodb.net/Reservations?retryWrites=true&w=majority";
+
+const uri = process.env.DB_ACCESS || dbAccess;
 
 mongoose
   .connect(uri, {
