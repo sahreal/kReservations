@@ -21,8 +21,8 @@ kReservations is a single page sample app to help users book reservations at the
  - Check Availability button submits API request to find if dining regions are eligible.
  - All submitted information must be valid and abide by restaurant rules and guidelines. 
  - Confirm button brings you to the Review Page.
- - Review page: Last chance to change your mind! Lists all previously submitted info. Confirm button updates the API updates. That reservation slot is now taken.
- - Confirmation: Its booked. Lists all relevant information, with "Make Another reservation button" bringing you to the home page and clearing local storage.
+ - Review page: Last chance to change your mind! Lists all previously submitted info with option to edit. Confirm button updates the API, that slot is now taken.
+ - Confirmation: Its booked. Lists all relevant information with "Make Another reservation button" bringing you to the home page and clearing local storage.
 
 ## Database:
   Using MongoDb Atlas as a database to store the availability during the half hour slots. Each seating area is its own collection. The availability adjusts and is updated when customers confirm their reservations.
@@ -61,11 +61,11 @@ Open:
 
 This was built on Chrome and I did not do cross-browser testing. Its not far from being mobile ready but could use some work, that would be the last step in really bringing this app full circle.
 
-Update docker-compose to allow local database testing on multiple machines and increase security, without needing to create guest passwords to have access to Atlas.
+Update docker-compose to allow local database testing on multiple machines and increase security without needing to create guest passwords to have access to Atlas.
 
 I had built out a schema and database in order to build a way for the user to actually store and then later retrieve their confirmations, but wanted to focus on other aspects of this app.
 
-In the future, and in general, I tend to use styled-components, but found that the inline styling wasnt too intense so I ended up using pure CSS.
+In the future, and in general, I tend to use styled-components, but found that the inline styling wasnt too intense so I ended up using pure CSS. I would update that going forward. 
 
 ## Credits
 
