@@ -1,8 +1,10 @@
 # kReservations
 
-A Full Stack Reservations Application
+A Full Stack Reservation Application
 
-A single page app to help users book reservations at their favorite restaurant during half hour slots between the hours of 6pm-10pm for the week of July 24th - July 31st.
+*Good things come to those who reserve it ahead of time!*
+
+kReservations is a single page sample app to help users book reservations at their favorite restaurant during half hour slots between the hours of 6pm-10pm for the week of July 24th - July 31st. 
 
 # Getting started:
 
