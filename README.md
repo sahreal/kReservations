@@ -25,7 +25,7 @@ kReservations is a single page sample app to help users book reservations at the
  - Confirmation: Its booked. Lists all relevant information, with "Make Another reservation button" bringing you to the home page and clearing local storage.
 
 ## Database:
-  Using MongoDb atlas as a database to store the availability during the half hour slots. Each seating area is its own collection. The availability adjusts and is updated when customers confirm their reservations.
+  Using MongoDb Atlas as a database to store the availability during the half hour slots. Each seating area is its own collection. The availability adjusts and is updated when customers confirm their reservations.
 
   ![Database](/ReadMeImages/mongoAtlas.png)
 
@@ -49,8 +49,10 @@ Open:
 
 - Javascript / HTML / CSS
 - React/ Hooks / React Router
-- Mongoose / MongoDB(atlas)
-- Webpack
+- Mongoose / MongoDB(Atlas)
+- Webpack/ Babel
+- Node/Express
+- Docker
 - Axios
 
 ## Considerations/Future Considerations
@@ -59,7 +61,7 @@ Open:
 
 This was built on Chrome and I did not do cross-browser testing. Its not far from being mobile ready but could use some work, that would be the last step in really bringing this app full circle.
 
-Update docker-compose to allow local database testing on multiple machines.
+Update docker-compose to allow local database testing on multiple machines and increase security, without needing to create guest passwords to have access to Atlas.
 
 I had built out a schema and database in order to build a way for the user to actually store and then later retrieve their confirmations, but wanted to focus on other aspects of this app.
 
